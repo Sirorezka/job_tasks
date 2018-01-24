@@ -1,3 +1,6 @@
+import feedparser
+import pandas as pd
+
 class rss_news_reader:
     def __init__(self, news_link):
         self.news_link  = news_link
