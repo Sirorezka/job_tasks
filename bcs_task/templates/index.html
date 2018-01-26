@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>News feed</title>
+	<style type = "text/css">
+		td,th{
+		padding: 3px 10px;
+		text-align:center;
+		}
+	</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+       $(document).ready(function(){
+
+           var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+           socket.on('connect', function() {
+               socket.emit('am up', {data: 'I\'m connected!'});
+           });
+           //listens to 'price update' message on socket
+           socket.on('price update', function(msg) {
+               // $('#price_info').append("sdf <br> dsf")
+			   	
+				$("#news_text").text("")
+				var tbl=$("<table/>").attr("id","news_table");
+				$("#news_text").append(tbl);
+				
+				var obj_msg = JSON.parse(msg);
+
+				var row_keys = Object.keys(obj_msg)
+				var col_keys = Object.keys(obj_msg[row_keys[1]])
+				// add column names
+				$('#news_table').append("<tr>");
+				for (col_name in col_keys){
+						$("#news_table").append("<td><b>"+col_name+"</b></td>");
+				}
+				$('#news_table').append("</tr>");
+
+				// add all other values			
+				for (var row_key in obj_msg) {
+					$('#news_table').append("<tr>");
+						for (var col_obj in obj_msg[row_key]){
+							$('#news_table').append("<td>"+obj_msg[row_key][col_obj]+"</td>");
+						}
+					$('#news_table').append("</tr>");
+					}
+					
+           });
+
+       });
+   </script>
+</head>
+<body>
+  <div id="news_text"></div>
+</body>
+</html>
