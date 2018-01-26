@@ -5,6 +5,8 @@ from flask_socketio import SocketIO, emit
 ## https://flask-socketio.readthedocs.io/en/latest/
 ## https://stackoverflow.com/questions/18395976/how-to-display-a-json-array-in-table-format
 
+##
+## https://flask-socketio.readthedocs.io/en/latest/
 
 from random import random
 import pandas as pd
