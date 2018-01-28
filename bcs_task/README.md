@@ -1,11 +1,12 @@
 Project was build on python 3.6 under Windows 10.
 
 **Description**
+
 Search for google trends in CNN news feed. Program parse google trends and parse and store CNN news in ElasticSearch database. For each google trend you can see most relevant CNN article in database. Project has simple web interface that shows result of search queries.
 
 **How it looks**
-See screenshot *progr_screenshot.PNG*
 
+See screenshot *progr_screenshot.PNG*
 
 **Launch** 
 
