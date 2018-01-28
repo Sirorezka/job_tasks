@@ -6,7 +6,7 @@ Search for google trends in CNN news feed. Program parse google trends and parse
 
 **How it looks**
 
-See screenshot *progr_screenshot.PNG*
+See screenshot *"progr_screenshot.PNG"*
 
 **Launch** 
 
