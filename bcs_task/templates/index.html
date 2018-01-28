@@ -18,23 +18,31 @@
            socket.on('connect', function() {
                socket.emit('am up', {data: 'I\'m connected!'});
            });
-           //listens to 'price update' message on socket
-           socket.on('price update', function(msg) {
+
+           //listens to 'cnn news update' message on socket
+           socket.on('cnn news update', function(msg) {
                // $('#price_info').append("sdf <br> dsf")
 			   	
-				$("#news_text").text("")
+
+			   	var obj_msg = JSON.parse(msg);
+				var row_keys = Object.keys(obj_msg);
+				var col_keys = Object.keys(obj_msg[row_keys[1]]);
+
+
+				$("#news_text").text(""); // clean current feed
+				var date_str = new Date().toLocaleString();
+				$("#news_text").append("Feed updated: ",date_str); // clean current feed
+
+
 				var tbl=$("<table/>").attr("id","news_table");
 				$("#news_text").append(tbl);
-				
-				var obj_msg = JSON.parse(msg);
 
-				var row_keys = Object.keys(obj_msg)
-				var col_keys = Object.keys(obj_msg[row_keys[1]])
+
 				// add column names
 				$('#news_table').append("<tr>");
-				for (col_name in col_keys){
-						$("#news_table").append("<td><b>"+col_name+"</b></td>");
-				}
+				for (i = 0; i < col_keys.length; i++) {
+						$("#news_table").append("<td><b>"+col_keys[i]+"</b></td>");
+				} 
 				$('#news_table').append("</tr>");
 
 				// add all other values			

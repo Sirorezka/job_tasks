@@ -41,12 +41,13 @@ ANALYZER_PARAMS = {
 
 
 class cnn_es_engine():
-	def __init__(self):
+	def __init__(self, delete_index=True):
 
 		self.es = Elasticsearch()
-		self.es.indices.delete(index='cnn_news', ignore=[400, 404])
-		es_analyzer = client.IndicesClient(self.es)
-		es_analyzer.create(index='cnn_news',body = ANALYZER_PARAMS)
+		if delete_index:
+			self.es.indices.delete(index='cnn_news', ignore=[400, 404])
+			es_analyzer = client.IndicesClient(self.es)
+			es_analyzer.create(index='cnn_news',body = ANALYZER_PARAMS)
 
 	## add cnn article to database
 	def add_article(self,doc,verbose = False):
@@ -62,7 +63,7 @@ class cnn_es_engine():
 				}}}
 		res = self.es.search(index="cnn_news", body=query_body,
 				size = val_size)
-		print (res)
+		return res
 
 
 if __name__ == "__main__":
